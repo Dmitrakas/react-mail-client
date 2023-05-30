@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import SendMessagePage from './components/SendMessagePage';
 
@@ -14,12 +14,12 @@ function App() {
     <Router>
       <Routes>
         <Route
-          exact path="/"
+          path="/"
           element={<LoginPage onLogin={handleLogin} />}
         />
         <Route
           path="/send-message"
-          element={<SendMessagePage username={username} />}
+          element={username ? <SendMessagePage username={username} /> : <Navigate to="/" />}
         />
       </Routes>
     </Router>
