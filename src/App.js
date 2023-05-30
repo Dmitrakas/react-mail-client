@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/"
+          exact path="/"
           element={<LoginPage onLogin={handleLogin} />}
         />
         <Route
