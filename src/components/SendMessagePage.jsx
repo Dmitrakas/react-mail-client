@@ -15,7 +15,8 @@ function SendMessagePage({ username }) {
 
   useEffect(() => {
     const fetchMessages = () => {
-      axios
+      if (username) {
+        axios
         .get(`https://dmitrakas-message-server.onrender.com/api/messages/${username}`)
         .then((response) => {
           setMessages(response.data);
@@ -23,6 +24,10 @@ function SendMessagePage({ username }) {
         .catch((error) => {
           console.error('Error retrieving messages:', error);
         });
+      }
+      else {
+        handleLogout();
+      }
     };
 
     fetchMessages();
