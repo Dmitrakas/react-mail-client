@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import '../styles/autosuggest.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,7 +12,14 @@ function SendMessagePage({ username }) {
   const [messages, setMessages] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!username) {
+      navigate('/');
+    }
+  }, [navigate, username]);
+  
   useEffect(() => {
     const fetchMessages = () => {
       if (username) {
@@ -24,9 +31,6 @@ function SendMessagePage({ username }) {
         .catch((error) => {
           console.error('Error retrieving messages:', error);
         });
-      }
-      else {
-        handleLogout();
       }
     };
 
