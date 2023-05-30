@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
+import { Navigate } from 'react-router-dom';
 import '../styles/autosuggest.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -10,6 +11,7 @@ function SendMessagePage({ username }) {
   const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
     const fetchMessages = () => {
@@ -105,6 +107,14 @@ function SendMessagePage({ username }) {
       })
     );
   };
+  
+  const handleLogout = () => {
+    setShouldRedirect(true);
+  };
+
+  if (!username || shouldRedirect) {
+    return <Navigate to="/" />;
+  }
 
   const inputProps = {
     placeholder: 'Enter recipient name',
@@ -115,6 +125,9 @@ function SendMessagePage({ username }) {
   return (
     <div className="container mt-4">
       <h1>Message Form:</h1>
+      <button className="btn btn-warning mb-3" onClick={handleLogout}>
+        Change User
+      </button>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="recipientName">Recipient Name:</label>
