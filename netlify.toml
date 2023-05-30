@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/send-message/*"
+  to = "/index.html"
+  status = 200
