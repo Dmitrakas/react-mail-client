@@ -1,6 +1,6 @@
 # Deployed App on Netlify.org
 
-https://transcendent-cocada-540de5.netlify.app
+https://magical-sawine-a6eb50.netlify.app
 
 ## Getting Started with Create React App
 
